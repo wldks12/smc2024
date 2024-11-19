@@ -1,0 +1,87 @@
+/* Reset some default margins and paddings */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: column; /* 수직 방향으로 요소를 배치 */
+  min-height: 100vh; /* 화면 전체 높이를 차지 */
+}
+
+.header {
+  width: 100%;
+  background-color: #282c34;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed; /* 화면의 최상단에 고정 */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+  height: 60px; /* 헤더 높이를 명시적으로 설정 */
+}
+
+.main-content {
+  display: flex;
+  margin-top: 60px; /* 헤더 높이만큼 여백 추가 */
+  flex-grow: 1;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  height: calc(100vh - 60px); /* 헤더 높이를 뺀 전체 높이 */
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 200px; /* 사이드바 너비만큼 마진 추가 */
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

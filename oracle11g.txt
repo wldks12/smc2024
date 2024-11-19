@@ -1,0 +1,42 @@
+C:\smc>docker search oracle-xe-11g
+C:\smc>docker pull oracleinanutshell/oracle-xe-11g
+C:\smc>docker run -d -–name smc_oracle -p 1521:1521 oracleinanutshell/oracle-xe-11g
+C:\smc>docker exec -it smc_oracle bash
+
+- 초기 관리자 정보 system / oracle
+- 버전 확인 : select * from v$version;
+- 모든 계정에 대한 정보 확인 : select * from all_users;
+- 현재 사용자 확인 : show user;
+- 테이블 전체 조회 : select * from tab;
+- 계정 생성(아이디 : test, 비밀번호 : 1234) :  create user test identified by "1234";
+- 권한 부여(test 계정에 DBA 역할 부여) :  grant dba to test;
+
+<------------------------ 연습 쿼리 시작 ------------------------>
+create table member_tbl_02 (
+	custno number(6) not null primary key,
+	custname varchar2(20),
+	phone varchar2(13),
+	address varchar2(60),
+	joindate date,
+	grade char(1),
+	city char(2)
+);
+
+create sequence custno_seq start with 100001 increment by 1 nocycle;
+
+insert into member_tbl_02 values (custno_seq.nextval, '김행복', '010-1111-2222', '서울 동대문구 휘경1동', '20151202', 'A', '01');
+insert into member_tbl_02 values (custno_seq.nextval, '이축복', '010-1111-3333', '서울 동대문구 휘경2동', '20151206', 'B', '01');
+insert into member_tbl_02 values (custno_seq.nextval, '장믿음', '010-1111-4444', '울릉군 울릉읍 독도1리', '20151001', 'B', '30');
+insert into member_tbl_02 values (custno_seq.nextval, '최사랑', '010-1111-5555', '울릉군 울릉읍 독도2리', '20151113', 'A', '30');
+insert into member_tbl_02 values (custno_seq.nextval, '진평화', '010-1111-6666', '제주도 제주시 외나무골', '20151225', 'B', '60');
+insert into member_tbl_02 values (custno_seq.nextval, '차공단', '010-1111-7777', '제주도 제주시 감나무골', '20151211', 'C', '60');
+
+commit;
+
+select * from member_tbl_02;
+select custno, custname,  phone, address, TO_CHAR(joindate, 'YYMMDD') AS joindate, grade, city FROM member_tbl_02;
+
+describe member_tbl_02;
+
+drop table member_tbl_02;
+<------------------------ 연습 쿼리 끝 ------------------------>

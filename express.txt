@@ -1,0 +1,38 @@
+cd c:\<폴더명>
+npm install yarn --global
+yarn add express
+서버 실행 : node <자바스크립트 파일>
+<------------------------ Hello World(app.js) 시작 ------------------------>
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
+<------------------------ Hello World(app.js) 끝 ------------------------>
+
+## Express Application Generator
+
+cd c:\<폴더명>
+yarn global add express-generator
+express --view=ejs <폴더명>
+   change directory:
+     > cd <폴더명>
+   install dependencies:
+     > yarn install
+   run the app:
+     > SET DEBUG=<폴더명>:* & yarn start
+
+// 문제 발생시 해결법
+express --view=ejs <폴더명>
+'express'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.
+
+yarn global bin
+C:\Users\<사용자명>\AppData\Local\Yarn\bin
+제어판 > 시스템 > 고급 시스템 설정 > 환경 변수 path 추가
+express --view=ejs <폴더명>

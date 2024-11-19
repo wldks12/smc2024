@@ -1,0 +1,4 @@
+C:\smc2024>docker search rocky
+C:\smc2024>docker pull rockylinux/rockylinux
+C:\smc2024>docker run -it -d --privileged --name smc_docker -p <호스트 포트>:<컨테이너 포트> rockylinux/rockylinux /usr/sbin/init
+C:\smc2024>docker exec -it smc_docker /bin/bash

@@ -1,0 +1,88 @@
+-- 사용자 테이블 생성
+CREATE TABLE users (
+    id NUMBER PRIMARY KEY,
+    name VARCHAR2(100) NOT NULL,
+    email VARCHAR2(100) UNIQUE NOT NULL,
+    password VARCHAR2(100) NOT NULL
+);
+
+-- 시퀀스 생성 (ID 자동 증가용)
+CREATE SEQUENCE users_seq START WITH 1 INCREMENT BY 1;
+
+-- 게시판 테이블 생성
+CREATE TABLE boards (
+    id NUMBER PRIMARY KEY,
+    title VARCHAR2(200) NOT NULL,
+    link VARCHAR2(1000),
+    content CLOB NOT NULL,
+    keyword CLOB,
+    user_id NUMBER REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP
+);
+
+-- 시퀀스 생성 (ID 자동 증가용)
+CREATE SEQUENCE boards_seq START WITH 1 INCREMENT BY 1;
+
+
+ㅁ app.js
+
+사용자 생성
+curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d "{\"name\": \"세명\", \"email\": \"1@smc2024.com\", \"password\": \"1234\"}"
+모든 사용자 조회
+curl -X GET http://localhost:3000/users
+특정 사용자 조회
+curl -X GET http://localhost:3000/users/1
+사용자 수정
+curl -X PUT http://localhost:3000/users/1 -H "Content-Type: application/json" -d "{\"name\": \"컴고\", \"email\": \"2@smc2024.com\", \"password\": \"12345\"}"
+사용자 삭제
+curl -X DELETE http://localhost:3000/users/1
+
+게시글 생성
+curl -X POST http://localhost:3000/boards -H "Content-Type: application/json" -d "{\"title\": \"제목\", \"link\": \"http://1.smc2024.kro.kr\", \"content\": \"내용\", \"keyword\": \"키워드\", \"user_id\": 1}"
+모든 게시글 조회
+curl -X GET http://localhost:3000/boards
+특정 게시글 조회
+curl -X GET http://localhost:3000/boards/1
+게시글 수정
+curl -X PUT http://localhost:3000/boards/1 -H "Content-Type: application/json" -d "{\"title\": \"수정된 제목\", \"link\": \"http://1.smc2024.kro.kr\", \"content\": \"수정된 내용\", \"keyword\": \"수정된 키워드\"}"
+게시글 삭제
+curl -X DELETE http://localhost:3000/boards/1
+
+로그인
+curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"1@smc2024.com\", \"password\": \"1234\"}"
+
+ㅁ app_bcrypt.js
+
+사용자 생성
+curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d "{\"name\": \"세명\", \"email\": \"1@smc2024.com\", \"password\": \"1234\"}"
+
+로그인
+curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"1@smc2024.com\", \"password\": \"1234\"}" -c cookies.txt
+
+모든 사용자 조회
+curl -X GET http://localhost:3000/users -b cookies.txt
+특정 사용자 조회
+curl -X GET http://localhost:3000/users/1 -b cookies.txt
+사용자 수정
+curl -X PUT http://localhost:3000/users/1 -H "Content-Type: application/json" -d "{\"name\": \"컴고\", \"email\": \"2g@smc2024.com\", \"password\": \"12345\"}" -b cookies.txt
+사용자 삭제
+curl -X DELETE http://localhost:3000/users/1
+curl -X DELETE http://localhost:3000/users/1 -b cookies.txt
+
+게시글 생성
+curl -X POST http://localhost:3000/boards -H "Content-Type: application/json" -d "{\"title\": \"제목\", \"link\": \"http://1.smc2024.kro.kr\", \"content\": \"내용\", \"keyword\": \"키워드\", \"user_id\": 1}" -b cookies.txt
+모든 게시글 조회
+curl -X GET http://localhost:3000/boards
+특정 게시글 조회
+curl -X GET http://localhost:3000/boards/1
+게시글 수정
+curl -X PUT http://localhost:3000/boards/1 -H "Content-Type: application/json" -d "{\"title\": \"수정된 제목\", \"link\": \"http://1.smc2024.kro.kr\", \"content\": \"수정된 내용\", \"keyword\": \"수정된 키워드\"}" -b cookies.txt
+게시글 삭제
+curl -X DELETE http://localhost:3000/boards/1
+curl -X DELETE http://localhost:3000/boards/1 -b cookies.txt
+
+로그인
+curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d "{\"email\": \"1@smc2024.com\", \"password\": \"1234\"}" -c cookies.txt
+
+
+https://jsonplaceholder.typicode.com
