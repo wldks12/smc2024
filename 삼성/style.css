@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #e4e4e4;
+    border-bottom: 1px solid #000;
+}
+
+.logo {
+    font-size: 50px;
+    font-weight: bold;
+    color: #1b1b1b;
+    margin: auto;
+}
+
+nav {
+    background-color: #ffffff;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none; /* 기본 밑줄 제거 */
+    color: #000000; /* 텍스트 색상 */
+    font-size: 18px; /* 글자 크기 */
+    position: relative; /* 가상 요소를 위한 상대 위치 설정 */
+    transition: color 0.3s ease-in-out; /* 색상 전환 부드럽게 */
+}
+
+nav ul li a::after {
+    content: ''; /* 밑줄 생성 */
+    position: absolute;
+    left: 0;
+    bottom: 0; /* 텍스트 아래 위치 */
+    width: 0; /* 기본 상태에서 밑줄 숨김 */
+    height: 2px; /* 밑줄 두께 */
+    background-color: #bbb9b9; /* 밑줄 색상 */
+    transition: width 0.3s ease-in-out; /* 밑줄 확장 애니메이션 */
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* 마우스를 올리면 밑줄이 확장 */
+}
+
+
+
+nav ul li a:hover {
+    color: #4d4c4c;
+}
+
+.content {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.content img {
+    width: 700px;
+    max-width: 1000px;
+}
+
+
+/* 슬라이드 */
+.slide {
+    position:relative ;
+    width: 700px;
+    overflow: hidden;
+}
+
+.slide > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: slide 10s linear infinite;
+    font-size: 0;
+}
