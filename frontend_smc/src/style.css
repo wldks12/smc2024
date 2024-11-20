@@ -68,8 +68,6 @@ nav ul li a:hover::after {
     width: 100%; /* 마우스를 올리면 밑줄이 확장 */
 }
 
-
-
 nav ul li a:hover {
     color: #4d4c4c;
 }
@@ -88,6 +86,6 @@ nav ul li a:hover {
     left: 0;
 }
 
-.slide-item img{
+.slide-item img {
     width: 600px;
-};
+}
