@@ -74,28 +74,20 @@ nav ul li a:hover {
     color: #4d4c4c;
 }
 
-.content {
-    text-align: center;
-    padding-top: 80px;
-}
-
-.content img {
-    width: 700px;
-    max-width: 1000px;
-}
-
-
-/* 슬라이드 */
-.slide {
-    position:relative ;
-    width: 700px;
+.slid {
+    width: 1000px;
+    height: 800px;
     overflow: hidden;
+    position: relative;
 }
 
-.slide > div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: slide 10s linear infinite;
+.slide-item {
     font-size: 0;
+    width: 3000px;
+    position: absolute;
+    left: 0;
 }
+
+.slide-item img{
+    width: 1000px;
+};
