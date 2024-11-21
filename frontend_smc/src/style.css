@@ -102,33 +102,6 @@ nav ul li button:hover::after {
 }
 
 
-/* 슬라이드 */
-.slide {
-    width: 100%; /* 화면에 맞게 슬라이더 컨테이너를 설정 */
-    max-width: 1000px; /* 슬라이더 최대 크기 */
-    height: 400px; /* 슬라이더 높이 */
-    margin: 0 auto; /* 가운데 정렬 */
-    overflow: hidden; /* 슬라이드 외부 잘림 */
-    position: relative; /* 내부 요소를 정렬하기 위한 기준 */
-}
-
-.slid {
-    display: flex; /* 슬라이드 아이템을 가로로 정렬 */
-    transition: transform 0.5s ease-in-out; /* 부드러운 전환 */
-}
-
-.slide-item img {
-    width: 100%; /* 이미지를 슬라이더에 맞게 조정 */
-    height: 100%; /* 슬라이더 높이에 맞춤 */
-    object-fit: cover; /* 이미지 비율을 유지하며 크기 조정 */
-}
-
-/* 부모 컨테이너에서 자식들 정렬 */
-.slide {
-    display: flex;
-    justify-content: center; /* 가운데 정렬 */
-    align-items: center; /* 세로 정렬 */
-}
 
 /* 게시판 스타일 */
 .board {
@@ -271,6 +244,71 @@ button:hover {
     color: #ff0000;
 }
 
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.image-container img {
+    max-width: 400px;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.product-info {
+    text-align: center;
+}
+
+.product-info h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-info p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.details-btn,
+.buy-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.details-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.buy-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+.buy-btn:hover {
+    background-color: #218838;
+}
+
+
 /* 폼 제목 */
 .modal-content h2 {
     font-size: 22px;
@@ -360,3 +398,28 @@ button:hover {
     }
 }
 
+
+/* 구매옵션 */
+.purchase-options {
+    margin-bottom: 20px;
+}
+
+.purchase-options label {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #333;
+}
+
+.purchase-options select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.purchase-options select:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}

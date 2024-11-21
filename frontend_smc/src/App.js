@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './style.css'; // CSS 파일 import
 
 function App() {
     return (
         <Router>
-            <Main /> {/* 헤더와 네비게이션은 항상 표시 */}
+            <Main />
         </Router>
     );
 }
@@ -16,7 +16,7 @@ function Main() {
             <Header />
             <Nav />
             <Routes>
-                <Route path="/" element={<Slider />} />
+                <Route path="/" element={<ImageDisplay />} />
                 <Route path="/board" element={<Board />} />
             </Routes>
         </div>
@@ -35,9 +35,8 @@ function Header() {
     );
 }
 
-
 function Nav() {
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = React.useState(false);
 
     const openModal = () => setShowModal(true); // 로그인 모달 열기
     const closeModal = () => setShowModal(false); // 로그인 모달 닫기
@@ -60,25 +59,25 @@ function Nav() {
 }
 
 function LoginModal({ closeModal }) {
-    const [isSignUp, setIsSignUp] = useState(false); // 회원가입/로그인 전환 상태
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 성공 상태
-    const [isSignedUp, setIsSignedUp] = useState(false); // 회원가입 성공 상태
+    const [isSignUp, setIsSignUp] = React.useState(false);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const [isSignedUp, setIsSignedUp] = React.useState(false);
 
     const toggleSignUp = () => setIsSignUp((prev) => !prev);
 
     const handleLogin = (e) => {
-        e.preventDefault(); // 기본 폼 제출 방지
-        setIsLoggedIn(true); // 로그인 성공 상태로 변경
+        e.preventDefault();
+        setIsLoggedIn(true);
         setTimeout(() => {
-            closeModal(); // 2초 후 모달 닫기
+            closeModal();
         }, 2000);
     };
 
     const handleSignUp = (e) => {
-        e.preventDefault(); // 기본 폼 제출 방지
-        setIsSignedUp(true); // 회원가입 성공 상태로 변경
+        e.preventDefault();
+        setIsSignedUp(true);
         setTimeout(() => {
-            toggleSignUp(); // 회원가입 완료 후 로그인 화면으로 전환
+            toggleSignUp();
         }, 2000);
     };
 
@@ -127,49 +126,62 @@ function LoginModal({ closeModal }) {
     );
 }
 
+function ImageDisplay() {
+    const [selectedOption, setSelectedOption] = React.useState(""); // 구매 옵션 상태 관리
 
+    const handleOptionChange = (e) => {
+        setSelectedOption(e.target.value);
+    };
 
-function Slider() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 3000); // 3초마다 이미지 변경
-        return () => clearInterval(interval);
-    }, []);
-
-    const images = [
-        "/img/unnamed1.png",
-        "/img/unnamed2.png",
-        "/img/unnamed3.png",
-    ];
+    const handlePurchase = () => {
+        if (selectedOption === "") {
+            alert("구매 옵션을 선택해주세요!");
+        } else {
+            alert(`"${selectedOption}" 옵션이 선택되었습니다. 구매 페이지로 이동합니다.`);
+            // 구매 페이지로 이동하는 로직 추가 가능
+        }
+    };
 
     return (
-        <div className="slide">
-            <div
-                className="slid"
-                style={{
-                    transform: `translateX(-${currentIndex * 100}%)`,
-                }}
-            >
-                {images.map((image, index) => (
-                    <img key={index} src={image} alt={`Slide ${index + 1}`} className="slide-item" />
-                ))}
+        <div className="image-container">
+            <img src="/img/unnamed2.png" alt="Samsung Galaxy S24+" />
+            <div className="product-info">
+                <h1>Galaxy S24+</h1>
+                <p>차세대 스마트폰의 혁신을 경험하세요. 더 나은 성능과 디자인을 제공합니다.</p>
+                <div className="purchase-options">
+                    <label htmlFor="options">구매 옵션:</label>
+                    <select
+                        id="options"
+                        value={selectedOption}
+                        onChange={handleOptionChange}
+                    >
+                        <option value="">옵션을 선택하세요</option>
+                        <option value="128GB">128GB - ₩1,000,000</option>
+                        <option value="256GB">256GB - ₩1,200,000</option>
+                        <option value="512GB">512GB - ₩1,400,000</option>
+                    </select>
+                </div>
+                <div className="cta-buttons">
+                    <button className="details-btn">자세히 보기</button>
+                    <button className="buy-btn" onClick={handlePurchase}>
+                        구매하기
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
 
+
 function Board() {
-    const [posts, setPosts] = useState([]); // 게시글 목록 상태
-    const [newPost, setNewPost] = useState(""); // 새 글 내용 상태
+    const [posts, setPosts] = React.useState([]);
+    const [newPost, setNewPost] = React.useState("");
 
     const handlePostSubmit = (e) => {
         e.preventDefault();
-        if (newPost.trim() === "") return; // 공백 방지
-        setPosts([...posts, newPost]); // 새 글 추가
-        setNewPost(""); // 입력창 초기화
+        if (newPost.trim() === "") return;
+        setPosts([...posts, newPost]);
+        setNewPost("");
     };
 
     return (
